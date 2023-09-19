@@ -20,7 +20,8 @@ final class CanvaRequestArgumentResolver implements ArgumentValueResolverInterfa
         $this->serializer = $serializer;
     }
 
-    public function supports(Request $request, ArgumentMetadata $argument)
+
+    public function supports(Request $request, ArgumentMetadata $argument): bool
     {
         $class = $argument->getType();
         if (!is_string($class)) {
@@ -35,7 +36,7 @@ final class CanvaRequestArgumentResolver implements ArgumentValueResolverInterfa
         return in_array(\Canva\Request::class, $haystack, true);
     }
 
-    public function resolve(Request $request, ArgumentMetadata $argument)
+    public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
         $body = $request->getContent();
 
